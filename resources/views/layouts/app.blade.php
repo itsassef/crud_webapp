@@ -79,5 +79,39 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $(function(e){
+            $('#checkAll').click(function(){
+                $('.checkboxSelect').prop('checked', $(this).prop('checked'));
+            });
+        })
+        $('#deleteAllSelected').click(function(e){
+            e.preventDefault();
+
+            let all_selected = [];
+
+            $('input[name=id]:checked').each(function(){
+                all_selected.push($(this).val());
+            });
+
+            $.ajax({
+                url: '{{route('deleteMultiple')}}',
+                type: 'POST',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    all_selected: all_selected
+
+                },
+                success: function(data) {
+                    $.each(all_selected, function(key, value) {
+                        $("#pid"+value).remove();
+                    })
+                }
+            });
+
+
+        })
+    </script>
 </body>
 </html>

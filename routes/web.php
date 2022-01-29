@@ -21,3 +21,10 @@ Auth::routes();
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Product CRUD routes
+Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'create'])->name('createProduct');
+Route::post('/product/add', [App\Http\Controllers\ProductController::class, 'store'])->name('addProduct');
+Route::get('/product/edit/{product}', [App\Http\Controllers\ProductController::class, 'edit'])->name('editProduct');
+Route::get('/product/delete/{product}', [App\Http\Controllers\ProductController::class, 'delete'])->name('deleteProduct');
+Route::post('/product/delete_multiple', [App\Http\Controllers\ProductController::class, 'deleteMultiple'])->name('deleteMultiple');
